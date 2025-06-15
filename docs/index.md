@@ -27,7 +27,7 @@ Welcome to the ultimate guide for building, wiring, and programming a fast line 
 ---
 
 ## 📐 Pinout Table
-See [hardware/pinout_tables.md](../hardware/pinout_tables.md) for a full table of all ESP32 pin assignments.
+See [pinout_tables.md](pinout_tables.md) for a full table of all ESP32 pin assignments.
 
 ---
 
@@ -37,7 +37,7 @@ Add your Fritzing or hand-drawn diagrams in [hardware/wiring_diagrams/](../hardw
 ---
 
 ## 🧪 Component Testing
-Test each part before full assembly! See [docs/component_testing.md](component_testing.md) for how to use:
+Test each part before full assembly! See [component_testing.md](component_testing.md) for how to use:
 - `test_motor.ino`
 - `test_encoder.ino`
 - `test_oled.ino`
@@ -54,7 +54,7 @@ Once all tests pass, upload `fastlinefollower/fastlinefollower.ino` for full ope
 ---
 
 ## 🛠️ Troubleshooting
-See [docs/troubleshooting.md](troubleshooting.md) for common issues and solutions.
+See [troubleshooting.md](troubleshooting.md) for common issues and solutions.
 
 ---
 
