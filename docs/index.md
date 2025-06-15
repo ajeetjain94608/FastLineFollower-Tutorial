@@ -32,7 +32,11 @@ See [pinout_tables.md](pinout_tables.md) for a full table of all ESP32 pin assig
 ---
 
 ## 🔌 Wiring Diagrams
-Add your Fritzing or hand-drawn diagrams in [hardware/wiring_diagrams/](../hardware/wiring_diagrams/).
+Add your Fritzing or hand-drawn diagrams in [wiring_diagrams/](wiring_diagrams/). Example:
+
+```markdown
+![Wiring Diagram](wiring_diagrams/your_diagram.png)
+```
 
 ---
 
