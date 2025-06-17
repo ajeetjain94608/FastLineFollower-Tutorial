@@ -1,3 +1,4 @@
+// Created by Ajeet Jain
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -7,8 +8,8 @@
 #define MOTOR_R_IN1 14
 #define MOTOR_R_IN2 12
 #define MOTOR_STBY  27
-#define MOTOR_L_IN1 26
-#define MOTOR_L_IN2 25
+#define MOTOR_L_IN1 25
+#define MOTOR_L_IN2 26
 #define MOTOR_L_PWM 33
 #define ENCODER_L_A 32
 #define ENCODER_L_B 16
@@ -95,12 +96,14 @@ void setup() {
   digitalWrite(BUZZER_PIN, LOW);
   Wire.begin(OLED_SDA, OLED_SCL);
   display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
+  display.setRotation(2);
   display.clearDisplay();
   display.setTextSize(2);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(0, 0);
   display.println("ALL TESTS");
   display.display();
+  showAjeetJain();
   delay(1000);
   Serial.begin(115200);
 }
@@ -117,6 +120,7 @@ void loop() {
     display.println(testNames[i]);
   }
   display.display();
+  showAjeetJain();
   // BTN_MODE cycles test, BTN_START selects
   static int lastMode = HIGH, lastStart = HIGH;
   int curMode = digitalRead(BTN_MODE);
@@ -141,14 +145,15 @@ void runTest(int mode) {
   display.print("Testing: ");
   display.println(testNames[mode]);
   display.display();
+  showAjeetJain();
   delay(500);
   if (mode == 0) { // Motor
     setMotors(200, 200);
-    display.clearDisplay(); display.setCursor(0,0); display.println("Motor FWD"); display.display(); delay(1000);
+    display.clearDisplay(); display.setCursor(0,0); display.println("Motor FWD"); display.display(); showAjeetJain(); delay(1000);
     setMotors(-200, -200);
-    display.clearDisplay(); display.setCursor(0,0); display.println("Motor BWD"); display.display(); delay(1000);
+    display.clearDisplay(); display.setCursor(0,0); display.println("Motor BWD"); display.display(); showAjeetJain(); delay(1000);
     setMotors(0, 0);
-    display.clearDisplay(); display.setCursor(0,0); display.println("Motor STOP"); display.display(); delay(1000);
+    display.clearDisplay(); display.setCursor(0,0); display.println("Motor STOP"); display.display(); showAjeetJain(); delay(1000);
   } else if (mode == 1) { // Encoder
     unsigned long t0 = millis();
     long l0 = encoderCountL, r0 = encoderCountR;
@@ -158,6 +163,7 @@ void runTest(int mode) {
       display.print("EncL: "); display.println(encoderCountL);
       display.print("EncR: "); display.println(encoderCountR);
       display.display();
+      showAjeetJain();
       Serial.print("EncL: "); Serial.print(encoderCountL);
       Serial.print("\tEncR: "); Serial.println(encoderCountR);
       delay(100);
@@ -180,6 +186,7 @@ void runTest(int mode) {
       }
       Serial.println();
       display.display();
+      showAjeetJain();
       delay(500);
     }
   } else if (mode == 3) { // Buttons
@@ -191,6 +198,7 @@ void runTest(int mode) {
       display.print("MODE:  "); display.println(digitalRead(BTN_MODE) == LOW ? "PRESSED" : "RELEASED");
       display.print("RESET: "); display.println(digitalRead(BTN_RESET) == LOW ? "PRESSED" : "RELEASED");
       display.display();
+      showAjeetJain();
       Serial.print("START: "); Serial.print(digitalRead(BTN_START) == LOW ? "PRESSED" : "RELEASED");
       Serial.print("\tCAL: "); Serial.print(digitalRead(BTN_CAL) == LOW ? "PRESSED" : "RELEASED");
       Serial.print("\tMODE: "); Serial.print(digitalRead(BTN_MODE) == LOW ? "PRESSED" : "RELEASED");
@@ -200,9 +208,9 @@ void runTest(int mode) {
   } else if (mode == 4) { // Buzzer
     for (int k=0; k<5; k++) {
       digitalWrite(BUZZER_PIN, HIGH);
-      display.clearDisplay(); display.setCursor(0,0); display.println("BUZZER ON"); display.display(); delay(200);
+      display.clearDisplay(); display.setCursor(0,0); display.println("BUZZER ON"); display.display(); showAjeetJain(); delay(200);
       digitalWrite(BUZZER_PIN, LOW);
-      display.clearDisplay(); display.setCursor(0,0); display.println("BUZZER OFF"); display.display(); delay(300);
+      display.clearDisplay(); display.setCursor(0,0); display.println("BUZZER OFF"); display.display(); showAjeetJain(); delay(300);
     }
   } else if (mode == 5) { // OLED
     display.clearDisplay();
@@ -215,13 +223,22 @@ void runTest(int mode) {
     display.setCursor(0, 40);
     display.println("Hello, ESP32!");
     display.display();
+    showAjeetJain();
     delay(2000);
   }
   display.clearDisplay();
   display.setCursor(0,0);
   display.println("Done. Press MODE");
   display.display();
+  showAjeetJain();
   // Wait for MODE to return to menu
   while (digitalRead(BTN_MODE) == HIGH) delay(10);
   delay(300);
+}
+
+// Helper to show 'Ajeet Jain' at the bottom
+void showAjeetJain() {
+  display.setTextSize(1);
+  display.setCursor(0, SCREEN_HEIGHT - 10);
+  display.println("Ajeet Jain");
 }

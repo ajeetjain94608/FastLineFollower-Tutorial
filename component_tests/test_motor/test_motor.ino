@@ -1,3 +1,4 @@
+// Created by Ajeet Jain
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -6,8 +7,8 @@
 #define MOTOR_R_IN1 14
 #define MOTOR_R_IN2 12
 #define MOTOR_STBY  27
-#define MOTOR_L_IN1 26
-#define MOTOR_L_IN2 25
+#define MOTOR_L_IN1 25
+#define MOTOR_L_IN2 26
 #define MOTOR_L_PWM 33
 // OLED pins
 #define OLED_SDA    21
@@ -27,6 +28,12 @@ void setMotors(int left, int right) {
   ledcWrite(MOTOR_R_PWM, abs(right));
 }
 
+void showAjeetJain() {
+  display.setTextSize(1);
+  display.setCursor(0, SCREEN_HEIGHT - 10);
+  display.println("Ajeet Jain");
+}
+
 void setup() {
   pinMode(MOTOR_L_PWM, OUTPUT);
   pinMode(MOTOR_L_IN1, OUTPUT);
@@ -40,6 +47,7 @@ void setup() {
   ledcAttach(MOTOR_R_PWM, 20000, 8); // New API
   Wire.begin(OLED_SDA, OLED_SCL);
   display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
+  display.setRotation(2);
   display.clearDisplay();
   display.setTextSize(2);
   display.setTextColor(SSD1306_WHITE);
@@ -54,18 +62,21 @@ void loop() {
   display.clearDisplay();
   display.setCursor(0, 0);
   display.println("FWD");
+  showAjeetJain();
   display.display();
   delay(1000);
   setMotors(-200, -200);
   display.clearDisplay();
   display.setCursor(0, 0);
   display.println("BWD");
+  showAjeetJain();
   display.display();
   delay(1000);
   setMotors(0, 0);
   display.clearDisplay();
   display.setCursor(0, 0);
   display.println("STOP");
+  showAjeetJain();
   display.display();
   delay(1000);
 }

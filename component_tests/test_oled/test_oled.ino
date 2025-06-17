@@ -1,3 +1,4 @@
+// Created by Ajeet Jain
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -10,9 +11,16 @@
 #define SCREEN_HEIGHT 64
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RST);
 
+void showAjeetJain() {
+  display.setTextSize(1);
+  display.setCursor(0, SCREEN_HEIGHT - 10);
+  display.println("Ajeet Jain");
+}
+
 void setup() {
   Wire.begin(OLED_SDA, OLED_SCL);
   display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
+  display.setRotation(2);
   display.clearDisplay();
   display.setTextSize(2);
   display.setTextColor(SSD1306_WHITE);
@@ -24,6 +32,7 @@ void setup() {
   display.setCursor(0, 40);
   display.println("Hello, ESP32!");
   display.display();
+  showAjeetJain();
 }
 
 void loop() {

@@ -1,3 +1,4 @@
+// Created by Ajeet Jain
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -23,6 +24,7 @@ void setup() {
   Serial.begin(115200);
   Wire.begin(OLED_SDA, OLED_SCL);
   display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
+  display.setRotation(2);
   display.clearDisplay();
   display.setTextSize(2);
   display.setTextColor(SSD1306_WHITE);
@@ -30,6 +32,12 @@ void setup() {
   display.println("BTN TEST");
   display.display();
   delay(1000);
+}
+
+void showAjeetJain() {
+  display.setTextSize(1);
+  display.setCursor(0, SCREEN_HEIGHT - 10);
+  display.println("Ajeet Jain");
 }
 
 void loop() {
@@ -44,6 +52,7 @@ void loop() {
   display.print("CAL:   "); display.println(digitalRead(BTN_CAL) == LOW ? "PRESSED" : "RELEASED");
   display.print("MODE:  "); display.println(digitalRead(BTN_MODE) == LOW ? "PRESSED" : "RELEASED");
   display.print("RESET: "); display.println(digitalRead(BTN_RESET) == LOW ? "PRESSED" : "RELEASED");
+  showAjeetJain();
   display.display();
   delay(100);
 }

@@ -1,3 +1,4 @@
+// Created by Ajeet Jain
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -26,6 +27,12 @@ void IRAM_ATTR encoderR_ISR() {
   else encoderCountR--;
 }
 
+void showAjeetJain() {
+  display.setTextSize(1);
+  display.setCursor(0, SCREEN_HEIGHT - 10);
+  display.println("Ajeet Jain");
+}
+
 void setup() {
   pinMode(ENCODER_L_A, INPUT_PULLUP);
   pinMode(ENCODER_L_B, INPUT_PULLUP);
@@ -36,6 +43,7 @@ void setup() {
   Serial.begin(115200);
   Wire.begin(OLED_SDA, OLED_SCL);
   display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
+  display.setRotation(2);
   display.clearDisplay();
   display.setTextSize(2);
   display.setTextColor(SSD1306_WHITE);
@@ -53,6 +61,7 @@ void loop() {
   display.setCursor(0, 0);
   display.print("EncL: "); display.println(encoderCountL);
   display.print("EncR: "); display.println(encoderCountR);
+  showAjeetJain();
   display.display();
   delay(100);
 }
